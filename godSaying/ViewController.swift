@@ -7,8 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITextFieldDelegate {
 
+    
+    @IBOutlet weak var wordTwo: UILabel!
+    @IBOutlet weak var wordOne: UILabel!
+    @IBOutlet weak var godImage: UIImageView!
+    @IBOutlet weak var reAskButton: UIButton!
+    @IBOutlet weak var q2Slider: UISlider!
+    @IBOutlet weak var q1Slider: UISlider!
     @IBOutlet weak var loanTextField: UITextField!
     @IBOutlet weak var instructLabel: UILabel!
     @IBOutlet weak var giftSegmentedControl: UISegmentedControl!
@@ -31,6 +38,11 @@ class ViewController: UIViewController {
         giftSegmentedControl.selectedSegmentIndex = 0
         giftImage.image = UIImage(named: "friedchicken")
         notKFCImage.isHidden = true
+        //instructLabel.isHidden = true
+        //useless
+        reAskButton.isHidden = true
+        q1Slider.isHidden = true
+        q2Slider.isHidden = true
         
         // Do any additional setup after loading the view.
     }
@@ -54,17 +66,20 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func askGod(_ sender: UIButton) {
+        godImage.isHidden = true
+        wordTwo.isHidden = true
+        wordOne.isHidden = true
         let loanAmount:Int  = Int(loanTextField.text!)!
         if loanAmount != nil, loanAmount != 0{
             if loanAmount <= 2000 && isStudent.isOn == true && isReturned.isOn == true {
                 resultImage.image = UIImage (named: "yes")
                 followUpImage.image = UIImage(named: "qrcode")
-                instructLabel.text = "立即掃碼申請，一天撥款"
+                instructLabel.text = "立即掃碼申請，一天撥款，安心免息"
                 //instructLabel.isHidden = false
             }else {
                 resultImage.image = UIImage( named: "no")
                 followUpImage.image = UIImage(named: "email")
-                instructLabel.text = "請掃碼來信廟公討論"
+                instructLabel.text = "條件不符，請掃碼來信廟公討論"
             }
             }else {
                 resultImage.image = UIImage (named: "donotask")
@@ -74,14 +89,16 @@ class ViewController: UIViewController {
     
     }
 
-    @IBAction func reAsk(_ sender: UIButton) {
+    /*@IBAction func reAsk(_ sender: UIButton) {
         loanTextField.text = ""
-        isStudent.isOn = false
-        isReturned.isOn = false
+        //isStudent.isOn = false
+        //isReturned.isOn = false
+        q1Slider.value = 0
+        q2Slider.value = 0
         resultImage.isHidden = true
         followUpImage.isHidden = true
         instructLabel.isHidden = true
-    }
+    }*/
 }
 
 
